@@ -31,7 +31,7 @@ struct ContentView: View {
                     .padding()
                     .background(.orange)
                     .background(in: Capsule())
-                    .padding(10)
+                    .padding(1)
                 
                 List {
                     ForEach(employees) { employee in
@@ -56,12 +56,15 @@ struct ContentView: View {
                                 Text("\(employee.joiningDate ?? Date(), formatter: itemFormatter)")
                             }
                         }
+                        .foregroundColor(.white)
                         .onTapGesture {
                             selectedEmployee = employee
                         }
                         .padding()
-                        .listRowBackground(Color.blue.opacity(0.5))
+                        .listRowBackground(Color.indigo)
+                        
                     }
+                    
                     .onDelete(perform: deleteItems)
                 }
                 .scrollContentBackground(.hidden)

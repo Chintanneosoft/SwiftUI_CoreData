@@ -35,8 +35,8 @@ struct EditView: View {
             HStack {
                 Text("Id: ")
                     .fontWeight(.bold)
-                
-                TextField("Id", value: $model.empId, formatter: NumberFormatter())
+                Text("\(model.empId)")
+//                TextField("Id", value: $model.empId, formatter: NumberFormatter())
             }
             HStack {
                 Text("Role")
