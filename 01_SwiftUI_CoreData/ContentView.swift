@@ -34,7 +34,7 @@ struct ContentView: View {
                     .padding(1)
                 
                 List {
-                    ForEach(employees) { employee in
+                    ForEach(Array(employees.enumerated()), id:\.1.id) { index,employee in
                         VStack(alignment: .leading, spacing: 5) {
                             HStack {
                                 Text("Name: ")
@@ -56,16 +56,28 @@ struct ContentView: View {
                                 Text("\(employee.joiningDate ?? Date(), formatter: itemFormatter)")
                             }
                         }
+                        .swipeActions(content: {
+                            Button {
+                                deleteItems(offsets: IndexSet(integer: index))
+                        } label: {
+                            Image(systemName: "trash")
+                        }
+                        .tint(.red)
+                        
+                        Button {
+                            selectedEmployee = employee
+                        } label: {
+                            Image(systemName: "pencil")
+                        }
+                        .tint(.green)
+                        })
                         .foregroundColor(.white)
                         .onTapGesture {
                             selectedEmployee = employee
                         }
                         .padding()
                         .listRowBackground(Color.indigo)
-                        
                     }
-                    
-                    .onDelete(perform: deleteItems)
                 }
                 .scrollContentBackground(.hidden)
                 
@@ -77,7 +89,7 @@ struct ContentView: View {
                 .fontWeight(.bold)
                 .background(.black)
                 .background(in: Capsule())
-                .foregroundColor(Color.mint)
+                .foregroundColor(Color.indigo)
                 .padding(10)
                 .sheet(isPresented: $isPresentingAdd) {
                         AddView(model: EmployeeModel(name: "", empId: 0, role: "", joiningDate: Date()), isPresenting: $isPresentingAdd)
@@ -86,7 +98,7 @@ struct ContentView: View {
                     EditView(model: EmployeeModel(name: selectedEmp.name ?? "", empId: Int(selectedEmp.empId), role: selectedEmp.role ?? "", joiningDate: selectedEmp.joiningDate ?? Date()))
                 }
             }
-            .background(.pink)
+            .background(.gray)
         }
     }
     
