@@ -89,7 +89,7 @@ struct ContentView: View {
                 .fontWeight(.bold)
                 .background(.black)
                 .background(in: Capsule())
-                .foregroundColor(Color.indigo)
+                .foregroundColor(Color.white)
                 .padding(10)
                 .sheet(isPresented: $isPresentingAdd) {
                         AddView(model: EmployeeModel(name: "", empId: 0, role: "", joiningDate: Date()), isPresenting: $isPresentingAdd)
@@ -98,7 +98,6 @@ struct ContentView: View {
                     EditView(model: EmployeeModel(name: selectedEmp.name ?? "", empId: Int(selectedEmp.empId), role: selectedEmp.role ?? "", joiningDate: selectedEmp.joiningDate ?? Date()))
                 }
             }
-            .background(.gray)
         }
     }
     
